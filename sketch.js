@@ -2,8 +2,9 @@ let capture, cnv, total;
 let prevFrame;
 let w = innerWidth;
 let h = innerHeight;
-let theta;
+
 let threshold;
+
 let show = false;
 let title, div;
 
@@ -25,27 +26,6 @@ function setup() {
         arv[i] = new Tree((i + 1) * width/7, height - random(100), random(80, 300));
     }
 
-}
-
-function popUpInfo() {
-  div = createDiv('This work aims to bring awerness to the climate change problem. In this very simple sketch you can see tree trunks, however, if you move in front of the camera you will see that the trees grow. The idea is to show that the problem will not be solved if we don\'t move, we have to do something! So move and see what happens');
-  div.position(width - width/3, 1.6*height/12, 'absolute');
-  div.style('color', 'white');
-  div.style('font-family', 'helvetica, sans-serif');
-  div.style('width', 'calc(100%/4)');
-  div.style('font-size', '14pt');
-  div.style('background-color', '#245C5D');
-  div.style('padding', '25px 25px 25px 25px');
-
-  title = createDiv('Move to Make a Change');
-  title.position(width - width/3, height/12, 'absolute');
-  title.style('color', '#9BB39D');
-  title.style('font-family', 'helvetica, sans-serif');
-  title.style('width', 'calc(100%/4)');
-  title.style('font-size', '24pt');
-  title.style('font-weight', 'bold');
-  title.style('background-color', '#245C5D');
-  title.style('padding', '25px 25px 0px 25px');
 }
 
 function draw() {
@@ -74,7 +54,7 @@ function draw() {
         arv[i].show();
     }
 
-    //BOTÃO DA INFORMAÇÃO
+    //BOTÃO PARA ABRIR A INFORMAÇÃO
     push();
     noFill();
     if(dist(mouseX, mouseY, width-50, 50) <= 25) {
@@ -97,6 +77,8 @@ function draw() {
 }
 
 function mousePressed() {
+
+  //ABRIR E FECHAR O POP UP
   if(dist(mouseX, mouseY, width-50, 50) <= 25) {
     if(show == false){
       show = true;
@@ -107,6 +89,28 @@ function mousePressed() {
       div.remove();
     }
   }
+}
+
+//POP UP COM A INFORMAÇÃO
+function popUpInfo() {
+  div = createDiv('This work aims to bring awerness to the climate change problem. In this very simple sketch you can see tree trunks, however, if you move in front of the camera you will see that the trees grow. The idea is to show that the problem will not be solved if we don\'t move, we have to do something! So move and see what happens');
+  div.position(width - width/3, 1.6*height/12, 'absolute');
+  div.style('color', 'white');
+  div.style('font-family', 'helvetica, sans-serif');
+  div.style('width', 'calc(100%/4)');
+  div.style('font-size', '14pt');
+  div.style('background-color', '#245C5D');
+  div.style('padding', '25px 25px 25px 25px');
+
+  title = createDiv('Move to Make a Change');
+  title.position(width - width/3, height/12, 'absolute');
+  title.style('color', '#9BB39D');
+  title.style('font-family', 'helvetica, sans-serif');
+  title.style('width', 'calc(100%/4)');
+  title.style('font-size', '24pt');
+  title.style('font-weight', 'bold');
+  title.style('background-color', '#245C5D');
+  title.style('padding', '25px 25px 0px 25px');
 }
 
 //FUNDO
@@ -156,6 +160,7 @@ function personMovement() {
   }
 }
 
+//COPIAR FRAME
 function copyImage(src, destiny) {
     let n = src.length;
     if (!destiny || destiny.length !== n) {

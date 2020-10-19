@@ -2,15 +2,14 @@ function Tree(x, y, trunkLength) {
   let init = createVector(x, y); //tronco
   let end = createVector(x, y - trunkLength);
   let tree = [];
-  let root = new Branch(init, end);
-  tree[0] = root;
+  tree[0] = new Branch(init, end, random(5, 10), color(75, 57, 54), color(36, 92, 93));
 
   this.show = function() {
     for(let i = 0; i < tree.length; i++) { //desenha a árvore
         tree[i].show();
     }
 
-    if(total > threshold && tree.length < 1000) { //se se tiver a mexer e não estiverem já 1000 ramos
+    if(total > threshold && tree.length < 10000) { //se se tiver a mexer e não estiverem já 1000 ramos
       for (var i = tree.length - 1; i >= 0; i--) {
         if(!tree[i].drawn) { //se ainda não foi desenhada
           tree.push(tree[i].branchRight()); //então adiciona os ramos à árvore

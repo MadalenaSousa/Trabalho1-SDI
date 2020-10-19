@@ -1,7 +1,5 @@
 let capture, cnv, total;
 let prevFrame;
-let w = innerWidth;
-let h = innerHeight;
 
 let threshold;
 
@@ -12,15 +10,15 @@ let arv = [];
 
 function setup() {
     capture = createCapture(VIDEO);
-    capture.size(640, 480);
-    capture.hide();
-    capture.center();
+    capture.size(320, 240);
+    //capture.hide();
+    capture.position(10, 10);
 
-    cnv = createCanvas(w, h);
+    cnv = createCanvas(innerWidth, innerHeight);
     cnv.center();
     cnv.position(0, 0, 'relative');
 
-    threshold = 450000;
+    threshold = 85000;
 
     for(i = 0; i < 6; i++) {
         arv[i] = new Tree((i + 1) * width/7, height - random(100), random(80, 300));
@@ -31,7 +29,7 @@ function setup() {
 function draw() {
     background(255);
     setGradient(0, 0, width, height, color(9,60,111), color(188,231,255));
-    frameRate(10);
+    frameRate(15);
 
     //CHÃO
     push();
@@ -136,7 +134,7 @@ function personMovement() {
       } else {
           for (let y = 0; y < capture.height; y++) {
               for (let x = 0; x < capture.width; x++) {
-                  let index =  x + y * w;
+                  let index =  x + y * capture.width;
 
                   //variação da cor de cada pixel
                   let rdif = Math.abs(capture.pixels[index] - prevFrame[index]);
